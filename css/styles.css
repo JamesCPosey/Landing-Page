@@ -211,21 +211,24 @@ section:nth-of-type(3n + 1) .landing__container::after {
 }
 /*added fireworks styling */
 .fireworks-container {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-  }
-  
-  .firework {
+    pointer-events: none;
+    z-index: -1;
+}
+
+.firework {
     position: absolute;
     width: 10px;
     height: 10px;
-    background-color: #ffeb3b; /* Firework color */
+    background-color: #ffeb3b;
     border-radius: 50%;
     opacity: 0;
     animation: explode 2s ease-out infinite;
-  }
-  
+}
 
   
 
