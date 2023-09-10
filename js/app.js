@@ -32,33 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    let isScrolling;
-
-window.addEventListener('scroll', function (event) {
-    window.clearTimeout(isScrolling);
-    navbar.style.display = 'block';
-
-    // Set a timeout to run after scrolling ends
-    isScrolling = setTimeout(function () {
-        navbar.style.display = 'none';
-    }, 2000);
-});
-
-/* Added listeners to make sure navbar is visible when mousing over top of screen */
-window.addEventListener('mouseover', function () {
-    navbar.style.display = 'block';
-});
-
-window.addEventListener('mouseout', function () {
-    isScrolling = setTimeout(function () {
-        navbar.style.display = 'none';
-    }, 2000);
-});
-
-
-    // Add event listener for scrolling
-    window.addEventListener('scroll', handleScroll);
-
+   
     // Function to handle smooth scrolling
     function scrollToSection(e) {
         e.preventDefault();
