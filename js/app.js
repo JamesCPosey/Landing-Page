@@ -1,101 +1,74 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Get all the sections in the document
-    const sections = document.querySelectorAll('.section');
+    // Define objects
+    const sections = document.querySelectorAll('section');
+    const navbar = document.getElementById('navbar__list');
+    const fireworksContainer = document.querySelector('.fireworks-container');
 
-    // Generate navigation items dynamically
-    const navbar = document.getElementById('navbar');
-    const fragment = document.createDocumentFragment();
-
-    sections.forEach(section => {
-        // Create a list item for each section
-        const listItem = document.createElement('li');
-        const link = document.createElement('a');
-
-        // Set the text content and link for the navigation item
-        link.textContent = section.querySelector('h2').textContent;
-        link.href = `#${section.id}`;
-
-        // Add the link to the list item, and list item to the fragment
-        listItem.appendChild(link);
-        fragment.appendChild(listItem);
-
-        // Add an event listener to enable smooth scrolling to the section
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            section.scrollIntoView({behavior: 'smooth'});
-        });
-    });
-
-    // Append the fragment to the navigation bar
-    navbar.appendChild(fragment);
-
-    // Function to set the active section in the navigation
-    function setActiveSection() {
-        const scrollPosition = window.scrollY;
-
+    // Function to create the navigation bar dynamically
+    function createNavbar() {
         sections.forEach(section => {
-            const offsetTop = section.offsetTop;
-            const offsetBottom = offsetTop + section.offsetHeight;
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<a class="menu__link" href="#${section.id}">${section.dataset.nav}</a>`;
+            navbar.appendChild(listItem);
+        });
+    }
 
-            if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
-                // Remove 'active' class from all navigation links
-                document.querySelectorAll('nav a').forEach(link => {
-                    link.classList.remove('active');
-                });
+    createNavbar(); // Call the function to create the navbar
 
-                // Add 'active' class to the current section's navigation link
-                document.querySelector(`nav a[href="#${section.id}"]`).classList.add('active');
+    // Function to set the active section and highlight corresponding navigation item
+    function setActiveSection() {
+        let found = false;
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top >= 0 && !found) {
+                section.classList.add('your-active-class');
+                const activeNav = navbar.querySelector(`[href="#${section.id}"]`);
+                activeNav.classList.add('active');
+                found = true;
+            } else {
+                section.classList.remove('your-active-class');
+                const inactiveNav = navbar.querySelector(`[href="#${section.id}"]`);
+                inactiveNav.classList.remove('active');
             }
         });
     }
 
-    // Event listeners for scrolling and resizing to update active section
-    window.addEventListener('scroll', setActiveSection);
-    window.addEventListener('resize', setActiveSection);
-    setActiveSection();
-
-    let scrollingTimer;
-
-    // Hide navigation bar when scrolling stops
-    window.addEventListener('scroll', function() {
-        clearTimeout(scrollingTimer);
-        scrollingTimer = setTimeout(function() {
-            navbar.style.opacity = 0;
-            setTimeout(function() {
-                navbar.style.display = 'none';
-            }, 500);
-        }, 1500);
-    });
-
-    // Show/hide scroll to top button based on scroll position
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > window.innerHeight) {
-            document.getElementById('scrollToTop').classList.remove('hidden');
-        } else {
-            document.getElementById('scrollToTop').classList.add('hidden');
-        }
-    });
-
-    // Scroll to top button functionality
-    document.getElementById('scrollToTop').addEventListener('click', function() {
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    });
-
-    // Toggle section content visibility
-    document.querySelectorAll('.collapse-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const section = this.parentElement;
-            const content = section.querySelector('p');
-
-            if (content.style.display === 'none' || content.style.display === '') {
-                content.style.display = 'block';
-                this.textContent = 'Collapse';
-            } else {
-                content.style.display = 'none';
-                this.textContent = 'Expand';
-            }
+    // Function to handle smooth scrolling
+    function scrollToSection(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        window.scrollTo({
+            top: targetSection.offsetTop - navbar.offsetHeight,
+            behavior: 'smooth'
         });
+    }
+    
+    // Function to create fireworks effect
+    function createFirework() {
+      const firework = document.createElement('div');
+      firework.classList.add('firework');
+      firework.style.left = `${Math.random() * 100}%`;
+      firework.style.top = `${Math.random() * 100}%`;
+      fireworksContainer.appendChild(firework);
+  
+      setTimeout(() => {
+        firework.remove();
+      }, 2000);
+    }
+  
+    function launchFireworks() {
+      setInterval(createFirework, 3000); // Launch fireworks every 3 seconds
+    }
+  
+    // Trigger fireworks on section load
+    if (fireworksContainer) {
+      launchFireworks();
+    }
+
+    // Add event listeners
+    window.addEventListener('scroll', setActiveSection);
+    navbar.querySelectorAll('.menu__link').forEach(anchor => {
+        anchor.addEventListener('click', scrollToSection);
     });
 });
-
-
