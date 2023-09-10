@@ -230,7 +230,10 @@ section:nth-of-type(3n + 1) .landing__container::after {
     animation: explode 2s ease-out infinite;
 }
 
-  
+  .hide-navbar {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+}
 
 /* ---- Theme State Rules ---- */
 /* Section Active Styles */
