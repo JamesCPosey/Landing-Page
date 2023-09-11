@@ -8,9 +8,8 @@ This project is a landing page with dynamic navigation and collapsible sections.
 - [Installation](#installation)
 - [How to Run](#how-to-run)
 - [Additional Sections](#additional-sections)
-- [Collapsible Sections](#collapsible-sections)
 - [Fireworks Effect](#fireworks-effect)
-- [Navbar Visibility](#navbar-visibility)
+- [Navbar Highlight](#navbar-highlight)
 
 ## Features
 
@@ -39,4 +38,8 @@ To add more sections, simply copy and paste the existing section structure in th
 
 We've added a dynamic fireworks animation to Section 2 of the landing page. When you hover over Section 2, you'll see fireworks display in the background.
 
-[Fireworks Animation] (https://unsplash.com/photos/WPTHZkA-M4I)
+![Fireworks Animation](<iframe src="https://giphy.com/embed/MViYNpI0wx69zX7j7w" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/strangerthings-netflix-stranger-things-MViYNpI0wx69zX7j7w">via GIPHY</a></p>)
+
+## Navbar Highlight
+
+Functionality added so that the navbar is highlighted when the section is highlighted.
