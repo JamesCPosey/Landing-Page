@@ -35,22 +35,8 @@ Open the `index.html` file in your preferred web browser.
 
 To add more sections, simply copy and paste the existing section structure in the `index.html` file. Remember to update the section IDs and data attributes.
 
-## Collapsible Sections
-
-To make a section collapsible, add a button with the class `collapsible` at the beginning of the section content. The content to be collapsed should be placed within a `div` element with the class `content`.
-
-Example:
-
-```html
-<section>
-  <button class="collapsible">Toggle Content</button>
-  <div class="content">
-    <!-- Your content goes here -->
-  </div>
-</section>
-
 ## Fireworks Animation
 
 We've added a dynamic fireworks animation to Section 2 of the landing page. When you hover over Section 2, you'll see fireworks display in the background.
 
-![Fireworks Animation] (https://unsplash.com/photos/WPTHZkA-M4I)
+[Fireworks Animation] (https://unsplash.com/photos/WPTHZkA-M4I)
