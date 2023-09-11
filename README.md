@@ -48,3 +48,9 @@ Example:
     <!-- Your content goes here -->
   </div>
 </section>
+
+## Fireworks Animation
+
+We've added a dynamic fireworks animation to Section 2 of the landing page. When you hover over Section 2, you'll see fireworks display in the background.
+
+![Fireworks Animation] (https://unsplash.com/photos/WPTHZkA-M4I)

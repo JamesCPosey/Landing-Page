@@ -4,34 +4,49 @@ document.addEventListener('DOMContentLoaded', function() {
     const navbar = document.getElementById('navbar__list');
     const collapsibleButtons = document.querySelectorAll('.collapsible');
 
-    // Function to create the navigation bar dynamically
+    // Function to create the navigation bar dynamically, as well as highlight when selected
     function createNavbar() {
         sections.forEach(section => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `<a class="menu__link" href="#${section.id}">${section.dataset.nav}</a>`;
             navbar.appendChild(listItem);
+    
+            // Add event listener for navigation item click
+            listItem.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetSection.offsetTop - navbar.offsetHeight,
+                    behavior: 'smooth'
+                });
+                setActiveSection(); // Highlight the clicked section
+            });
         });
     }
+    
 
     createNavbar(); // Call the function to create the navbar
 
     // Function to set the active section and highlight corresponding navigation item
     function setActiveSection() {
-        let found = false;
-        sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top >= 0 && !found) {
-                section.classList.add('your-active-class');
-                const activeNav = navbar.querySelector(`[href="#${section.id}"]`);
-                activeNav.classList.add('active');
-                found = true;
-            } else {
-                section.classList.remove('your-active-class');
-                const inactiveNav = navbar.querySelector(`[href="#${section.id}"]`);
-                inactiveNav.classList.remove('active');
-            }
-        });
-    }
+      let found = false;
+      sections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top >= 0 && !found) {
+              section.classList.add('your-active-class');
+              const activeNav = navbar.querySelector(`[href="#${section.id}"]`);
+              activeNav.classList.add('active');
+              found = true;
+          } else {
+              section.classList.remove('your-active-class');
+              const inactiveNav = navbar.querySelector(`[href="#${section.id}"]`);
+              inactiveNav.classList.remove('active');
+          }
+      });
+  }
+  
+    
    
     // Function to handle smooth scrolling
     function scrollToSection(e) {
